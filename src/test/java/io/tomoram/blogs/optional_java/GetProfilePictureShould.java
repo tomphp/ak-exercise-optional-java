@@ -63,7 +63,7 @@ public class GetProfilePictureShould {
 
     @Test public void
     return_null_if_profile_picture_is_null() {
-        given(userRepository.fetchById(USER_ID)).willReturn(Optional.of(User.withOutProfilePic()));
+        given(userRepository.fetchById(USER_ID)).willReturn(Optional.of(User.withOutProfilePicture()));
 
         Optional<String> result = getProfilePicture.forUser(USER_ID);
 

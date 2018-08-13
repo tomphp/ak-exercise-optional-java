@@ -9,7 +9,7 @@ public class User {
         this.profilePic = profilePic;
     }
 
-    public static User withOutProfilePic() {
+    public static User withOutProfilePicture() {
         return new User(null);
     }
 
