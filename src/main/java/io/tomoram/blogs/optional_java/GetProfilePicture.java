@@ -11,12 +11,9 @@ public class GetProfilePicture {
     }
 
     public String forUser(UUID userId) {
-        if (userId == null) {
-            return null;
-        }
-
-        Optional<User> user = userRepository.fetchById(userId);
-
-        return user.flatMap(User::getProfilePic).orElse(null);
+        return Optional.ofNullable(userId)
+                .flatMap(userRepository::fetchById)
+                .flatMap(User::getProfilePic)
+                .orElse(null);
     }
 }
