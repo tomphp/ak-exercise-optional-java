@@ -10,10 +10,9 @@ public class GetProfilePicture {
         this.userRepository = userRepository;
     }
 
-    public String forUser(UUID userId) {
+    public Optional<String> forUser(UUID userId) {
         return Optional.ofNullable(userId)
                 .flatMap(userRepository::fetchById)
-                .flatMap(User::getProfilePic)
-                .orElse(null);
+                .flatMap(User::getProfilePic);
     }
 }

@@ -33,9 +33,9 @@ public class GetProfilePictureShould {
 
     @Test public void
     return_empty_if_user_id_is_null() {
-        String result = getProfilePicture.forUser(null);
+        Optional<String> result = getProfilePicture.forUser(null);
 
-        assertThat(result).isNull();
+        assertThat(result).isEmpty();
     }
 
     @Test public void
@@ -47,26 +47,26 @@ public class GetProfilePictureShould {
 
     @Test public void
     return_the_profile_picture_url() {
-        String result = getProfilePicture.forUser(USER_ID);
+        Optional<String> result = getProfilePicture.forUser(USER_ID);
 
-        assertThat(result).isEqualTo("profile-pic.jpg");
+        assertThat(result).contains("profile-pic.jpg");
     }
 
     @Test public void
     return_null_if_user_is_not_found() {
         given(userRepository.fetchById(USER_ID)).willReturn(Optional.empty());
 
-        String result = getProfilePicture.forUser(USER_ID);
+        Optional<String> result = getProfilePicture.forUser(USER_ID);
 
-        assertThat(result).isNull();
+        assertThat(result).isEmpty();
     }
 
     @Test public void
     return_null_if_profile_picture_is_null() {
         given(userRepository.fetchById(USER_ID)).willReturn(Optional.of(User.withOutProfilePic()));
 
-        String result = getProfilePicture.forUser(USER_ID);
+        Optional<String> result = getProfilePicture.forUser(USER_ID);
 
-        assertThat(result).isNull();
+        assertThat(result).isEmpty();
     }
 }
