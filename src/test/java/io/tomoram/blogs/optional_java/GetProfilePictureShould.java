@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ public class GetProfilePictureShould {
     @Before
     public void
     setUp() {
-        given(userRepository.fetchById(USER_ID)).willReturn(USER);
+        given(userRepository.fetchById(USER_ID)).willReturn(Optional.of(USER));
 
         getProfilePicture = new GetProfilePicture(userRepository);
     }
@@ -53,7 +54,7 @@ public class GetProfilePictureShould {
 
     @Test public void
     return_null_if_user_is_not_found() {
-        given(userRepository.fetchById(USER_ID)).willReturn(null);
+        given(userRepository.fetchById(USER_ID)).willReturn(Optional.empty());
 
         String result = getProfilePicture.forUser(USER_ID);
 
@@ -62,7 +63,7 @@ public class GetProfilePictureShould {
 
     @Test public void
     return_null_if_profile_picture_is_null() {
-        given(userRepository.fetchById(USER_ID)).willReturn(User.withOutProfilePic());
+        given(userRepository.fetchById(USER_ID)).willReturn(Optional.of(User.withOutProfilePic()));
 
         String result = getProfilePicture.forUser(USER_ID);
 

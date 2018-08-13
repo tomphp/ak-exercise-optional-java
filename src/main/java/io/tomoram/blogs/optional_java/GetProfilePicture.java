@@ -1,6 +1,6 @@
 package io.tomoram.blogs.optional_java;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public class GetProfilePicture {
@@ -15,12 +15,12 @@ public class GetProfilePicture {
             return null;
         }
 
-        User user = userRepository.fetchById(userId);
+        Optional<User> user = userRepository.fetchById(userId);
 
-        if (Objects.isNull(user)) {
+        if (!user.isPresent()) {
             return null;
         }
 
-        return user.getProfilePic();
+        return user.get().getProfilePic();
     }
 }
