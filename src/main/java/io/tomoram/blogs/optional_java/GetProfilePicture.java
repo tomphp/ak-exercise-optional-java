@@ -17,10 +17,6 @@ public class GetProfilePicture {
 
         Optional<User> user = userRepository.fetchById(userId);
 
-        if (!user.isPresent()) {
-            return null;
-        }
-
-        return user.get().getProfilePic();
+        return user.map(User::getProfilePic).orElse(null);
     }
 }
