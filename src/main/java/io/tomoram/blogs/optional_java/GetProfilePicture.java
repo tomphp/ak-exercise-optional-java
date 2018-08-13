@@ -17,6 +17,6 @@ public class GetProfilePicture {
 
         Optional<User> user = userRepository.fetchById(userId);
 
-        return user.map(User::getProfilePic).orElse(null);
+        return user.flatMap(User::getProfilePic).orElse(null);
     }
 }

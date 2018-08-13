@@ -1,5 +1,7 @@
 package io.tomoram.blogs.optional_java;
 
+import java.util.Optional;
+
 public class User {
     private String profilePic;
 
@@ -15,7 +17,7 @@ public class User {
         return new User(profilePic);
     }
 
-    public String getProfilePic() {
-        return profilePic;
+    public Optional<String> getProfilePic() {
+        return Optional.ofNullable(profilePic);
     }
 }
